@@ -1,0 +1,105 @@
+<div class='rounded p-2 px-3 d-flex justify-content-between align-items-center'>
+    <div></div>
+    <button
+        class='btn btn-success'
+        data-mdb-toggle='modal'
+        data-mdb-target='#createModal'
+    >+ Thêm môn học</button>
+</div>
+<hr class='mt-0' />
+
+<div class='row'>
+    {{#each posts}}
+        <div class='col-5 mb-3'>
+            <div class='card'>
+                <div class='card-body'>
+                    <div class='d-flex justify-content-between'>
+                        <h5 class='card-title mb-1'>{{author.name}}</h5>
+                        {{#if answerUrl}}
+                            <a
+                                href='{{answerUrl}}'
+                                target='_blank'
+                                class='btn btn-success'
+                            >Answer</a>
+                        {{/if}}
+                    </div>
+                    <span
+                        class='text-muted'
+                        style='font-size: 11px;'
+                    >{{updatedAt}}</span>
+                    <p class='card-text mt-2'>{{description}}</p>
+                    <iframe
+                        src='https://www.facebook.com/plugins/post.php?href={{url}}&width=500&show_text=false&height=498&appId'
+                        style='border:none;overflow:hidden'
+                        scrolling='no'
+                        frameborder='0'
+                        allowfullscreen='true'
+                        allow='autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share'
+                    ></iframe>
+                </div>
+            </div>
+        </div>
+    {{/each}}
+</div>
+
+<!-- Modal -->
+<div
+    class='modal fade'
+    id='createModal'
+    tabindex='-1'
+    aria-labelledby='exampleModalLabel'
+    aria-hidden='true'
+>
+    <div class='modal-dialog'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <h5 class='modal-title' id='exampleModalLabel'>Thêm môn học</h5>
+                <button
+                    type='button'
+                    class='btn-close'
+                    data-mdb-dismiss='modal'
+                    aria-label='Close'
+                ></button>
+            </div>
+            <form method='post' action='/posts' class='mb-0'>
+                <div class='modal-body'>
+                    <div class='form-outline mb-4'>
+                        <input
+                            type='text'
+                            name='name'
+                            class='form-control'
+                        />
+                        <label class='form-label' for='desc'>Tên</label>
+                    </div>
+                    <div class='form-outline mb-4'>
+                        <input
+                            type='text'
+                            name='answerUrl'
+                            class='form-control'
+                        />
+                        <label class='form-label' for='answer'>Link đáp án</label>
+                    </div>
+
+                    <div class='form-outline mb-4'>
+                        <input
+                            type='text'
+                            name='url'
+                            class='form-control'
+                            required
+                        />
+                        <label class='form-label' for='url'>Link hoạt động
+                            <span class='text-danger'>*</span></label>
+                    </div>
+                </div>
+                <div class='modal-footer'>
+                    <button
+                        type='button'
+                        class='btn btn-secondary'
+                        data-mdb-dismiss='modal'
+                    >Đóng</button>
+                    <button type='submit' class='btn btn-primary'>Thêm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
