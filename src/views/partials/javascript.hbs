@@ -14,6 +14,17 @@
     integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl'
     crossorigin='anonymous'
 ></script>
+<script
+    src='https://cdn.tiny.cloud/1/w7xqov8oy5y3fsk0xbp0uita5gotyph0wzhcemahnjds7gud/tinymce/6/tinymce.min.js'
+    referrerpolicy='origin'
+></script>
+<script>
+    tinymce.init({
+        selector: '.tiny',
+        placeholder: 'Viết ở đây...',
+        plugins: 'advlist autolink link image lists charmap preview table',
+    });
+</script>
 <script>
     setTimeout(function() { $('.alert').hide(); }, 5000);
 </script>

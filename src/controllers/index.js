@@ -5,5 +5,5 @@ module.exports = {
     postController: require('./post'),
     courseController: require('./course'),
     calendarController: require('./calendar'),
-    tradeController: require('./trade'),
+    marketController: require('./market'),
 };

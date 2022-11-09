@@ -1,0 +1,316 @@
+{{#if message.error}}
+    <div
+        class='alert alert-dismissible fade show alert-danger w-50'
+        role='alert'
+        data-mdb-color='warning'
+        id='customxD'
+    >
+        <i class='fas fa-times-circle me-3'></i>{{message.error}}
+        <button
+            type='button'
+            class='btn-close'
+            data-mdb-dismiss='alert'
+            aria-label='Close'
+        ></button>
+    </div>
+{{/if}}
+
+{{#if message.success}}
+    <div
+        class='alert alert-dismissible fade show alert-success w-50'
+        role='alert'
+        data-mdb-color='warning'
+        id='customxD'
+    >
+        <i class='fas fa-check-circle me-3'></i>{{message.success}}
+        <button
+            type='button'
+            class='btn-close'
+            data-mdb-dismiss='alert'
+            aria-label='Close'
+        ></button>
+    </div>
+{{/if}}
+<div class='shadow rounded p-3 mb-3 bg-info text-white text-center'>
+    <h1 class='mb-0'>{{course.name}}</h2>
+</div>
+<div class='row'>
+    <div class='col-lg-2'>
+        <div class='card mb-4'>
+            <div class='card-body text-center'>
+                <div class='nav-item dropdown'>
+                    <a
+                        class='me-3 me-lg-0 dropdown-toggle hidden-arrow btn btn-primary'
+                        href='#'
+                        id='navbarDropdownMenuLink'
+                        role='button'
+                        data-mdb-toggle='dropdown'
+                        aria-expanded='false'
+                    >
+                        + Thêm
+                    </a>
+                    <ul
+                        class='dropdown-menu dropdown-menu-end'
+                        aria-labelledby='navbarDropdownMenuLink'
+                    >
+                        <li><a
+                                class='dropdown-item'
+                                href='#'
+                                data-mdb-toggle='modal'
+                                data-mdb-target='#createNoteModal'
+                            ><i class='fa-solid fa-book-open me-1'></i> Ghi chú</a></li>
+                        <li><a
+                                class='dropdown-item'
+                                href='#'
+                                data-mdb-toggle='modal'
+                                data-mdb-target='#createExamModal'
+                            ><i class='fa-solid fa-calendar-plus me-1'></i></i> Kiểm tra</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class='col-lg-10'>
+        {{#if course.materials}}
+        <h4>Bài học</h4>
+        <hr />
+        {{#each course.materials}}
+        <div class='card mb-4'>
+            <div class='card-body'>
+                <div class='d-flex align-items-center'>
+                    <span class='h6'><i class='fa-solid fa-book-open fa-lg me-4'></i></span>
+                    <h5 class='me-auto'><a href='/{{../course._id}}/m/{{@index}}'>{{title}}</a></h5>
+                    <a 
+                        class='h6 text-muted' 
+                        href='#'
+                        data-mdb-toggle='modal'
+                        data-mdb-target='#deleteNoteModal'
+                        onclick="$('#delete-note-idx').val('{{@index}}');">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+        {{/if}}
+
+        {{#if course.examinations}}
+        <h4>Lịch kiểm tra</h4>
+        <hr />
+        {{#each course.examinations}}
+        <div class='card mb-4'>
+            <div class='card-body'>
+                <div class='d-flex align-items-center'>
+                    <span class='h6'><i class='fa-solid fa-calendar-plus fa-lg me-4'></i></i></span>
+                    <h5 class='me-auto'><a href='/{{ ../course._id}}/e/{{@index}}'>{{title}}</a></h5>
+                    <a
+                        class='h6 text-muted'
+                        href='#'
+                        data-mdb-toggle='modal'
+                        data-mdb-target='#deleteExamModal'
+                        onclick="$('#delete-exam-idx').val('{{@index}}');">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+        {{/if}}
+    </div>
+</div>
+
+<!-- Modal -->
+<div
+    class='modal fade'
+    id='createNoteModal'
+    tabindex='-1'
+    aria-labelledby='exampleModalLabel'
+    aria-hidden='true'
+>
+    <div class='modal-dialog'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <h5 class='modal-title' id='exampleModalLabel'>Thêm ghi chú</h5>
+                <button
+                    type='button'
+                    class='btn-close'
+                    data-mdb-dismiss='modal'
+                    aria-label='Close'
+                ></button>
+            </div>
+            <form method='post' action='/course/material/create' class='mb-0'>
+                <div class='modal-body'>
+                    <input type="hidden" name="id" value="{{course._id}}">
+                    <div class='form-outline mb-4'>
+                        <input
+                            type='text'
+                            id='title'
+                            name='title'
+                            class='form-control'
+                            required
+                        />
+                        <label class='form-label' for='title'>Tiêu đề
+                            <span class='text-danger'>*</span></label>
+                    </div>
+                    <div class='form-outline mb-4'>
+                        <label class='form-label' for='answer'>Nội dung</label>
+                        <textarea
+                            id='content'
+                            name='content'
+                            class='tiny'
+                        ></textarea>
+                    </div>
+                </div>
+                <div class='modal-footer'>
+                    <button
+                        type='button'
+                        class='btn btn-secondary'
+                        data-mdb-dismiss='modal'
+                    >Đóng</button>
+                    <button type='submit' class='btn btn-primary'>Thêm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div
+    class='modal fade'
+    id='createExamModal'
+    tabindex='-1'
+    aria-labelledby='exampleModalLabel'
+    aria-hidden='true'
+>
+    <div class='modal-dialog'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <h5 class='modal-title' id='exampleModalLabel'>Thêm lịch kiểm
+                    tra</h5>
+                <button
+                    type='button'
+                    class='btn-close'
+                    data-mdb-dismiss='modal'
+                    aria-label='Close'
+                ></button>
+            </div>
+            <form method='post' action='/course/examination/create' class='mb-0'>
+                <div class='modal-body'>
+                    <input type="hidden" name="id" value="{{course._id}}">
+                    <div class='form-outline mb-4'>
+                        <input
+                            type='text'
+                            id='title'
+                            name='title'
+                            class='form-control'
+                            required
+                        />
+                        <label class='form-label' for='title'>Tiêu đề
+                            <span class='text-danger'>*</span></label>
+                    </div>
+                    <div class='form-outline mb-4'>
+                        <label class='form-label' for='answer'>Nội dung</label>
+                        <textarea
+                            id='content'
+                            name='content'
+                            class='tiny'
+                        ></textarea>
+                    </div>
+                    <div class='mb-4'>
+                        <label class='form-label' for='title'>Ngày kiểm tra
+                            <span class='text-danger'>*</span></label>
+                        <input
+                            type='datetime-local'
+                            id='time'
+                            name='time'
+                            class='form-control'
+                            required
+                        />
+                    </div>
+                </div>
+                <div class='modal-footer'>
+                    <button
+                        type='button'
+                        class='btn btn-secondary'
+                        data-mdb-dismiss='modal'
+                    >Đóng</button>
+                    <button type='submit' class='btn btn-primary'>Thêm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div
+    class='modal fade'
+    id='deleteNoteModal'
+    tabindex='-1'
+    aria-labelledby='exampleModalLabel'
+    aria-hidden='true'
+>
+    <div class='modal-dialog'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <h5 class='modal-title' id='exampleModalLabel'>Xoá ghi chú</h5>
+                <button
+                    type='button'
+                    class='btn-close'
+                    data-mdb-dismiss='modal'
+                    aria-label='Close'
+                ></button>
+            </div>
+            <form method='post' action='/course/material/delete' class='mb-0'>
+                <div class='modal-body'>
+                    <input type="hidden" name="id" value="{{course._id}}">
+                    <input type='hidden' name='idx' id='delete-note-idx' />
+                    <p>Bạn có muốn xoá ghi chú này?</p>
+                </div>
+                <div class='modal-footer'>
+                    <button
+                        type='button'
+                        class='btn btn-secondary'
+                        data-mdb-dismiss='modal'
+                    >Đóng</button>
+                    <button type='submit' class='btn btn-danger'>Xoá</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div
+    class='modal fade'
+    id='deleteExamModal'
+    tabindex='-1'
+    aria-labelledby='exampleModalLabel'
+    aria-hidden='true'
+>
+    <div class='modal-dialog'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <h5 class='modal-title' id='exampleModalLabel'>Xoá lịch kiểm tra</h5>
+                <button
+                    type='button'
+                    class='btn-close'
+                    data-mdb-dismiss='modal'
+                    aria-label='Close'
+                ></button>
+            </div>
+            <form method='post' action='/course/examination/delete' class='mb-0'>
+                <div class='modal-body'>
+                    <input type="hidden" name="id" value="{{course._id}}">
+                    <input type='hidden' name='idx' id='delete-exam-idx' />
+                    <p>Bạn có muốn xoá lịch kiểm tra này?</p>
+                </div>
+                <div class='modal-footer'>
+                    <button
+                        type='button'
+                        class='btn btn-secondary'
+                        data-mdb-dismiss='modal'
+                    >Đóng</button>
+                    <button type='submit' class='btn btn-danger'>Xoá</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

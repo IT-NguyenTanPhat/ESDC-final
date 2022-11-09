@@ -7,10 +7,10 @@ const authRouter = require('./auth');
 const adminRouter = require('./admin');
 const clientRouter = require('./client');
 
-/* GET home page. */
+// Current path: /
 router.use('/', isLoggedIn);
-router.use('/', clientRouter);
 router.use('/auth', authRouter);
 router.use('/admin', adminRouter);
+router.use('/', clientRouter);
 
 module.exports = router;

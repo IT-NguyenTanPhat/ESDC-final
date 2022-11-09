@@ -7,35 +7,89 @@
     >+ Thêm môn học</button>
 </div>
 <hr class='mt-0' />
+{{#if message.error}}
+    <div
+        class='alert alert-dismissible fade show alert-danger w-50'
+        role='alert'
+        data-mdb-color='warning'
+        id='customxD'
+    >
+        <i class='fas fa-times-circle me-3'></i>{{message.error}}
+        <button
+            type='button'
+            class='btn-close'
+            data-mdb-dismiss='alert'
+            aria-label='Close'
+        ></button>
+    </div>
+{{/if}}
+
+{{#if message.success}}
+    <div
+        class='alert alert-dismissible fade show alert-success w-50'
+        role='alert'
+        data-mdb-color='warning'
+        id='customxD'
+    >
+        <i class='fas fa-check-circle me-3'></i>{{message.success}}
+        <button
+            type='button'
+            class='btn-close'
+            data-mdb-dismiss='alert'
+            aria-label='Close'
+        ></button>
+    </div>
+{{/if}}
 
 <div class='row'>
-    {{#each posts}}
-        <div class='col-5 mb-3'>
-            <div class='card'>
+    {{#each courses}}
+        <div class='col-5 mb-3' style='height: 250px'>
+            <div class='card h-100'>
                 <div class='card-body'>
-                    <div class='d-flex justify-content-between'>
-                        <h5 class='card-title mb-1'>{{author.name}}</h5>
-                        {{#if answerUrl}}
+                    <ul
+                        class='navbar-nav ms-auto d-flex flex-row justify-content-between align-items-center'
+                    >
+                        <h5 class='card-title mb-0'><a
+                                href='/{{_id}}'
+                            >{{name}}</a></h5>
+                        <li class='nav-item dropdown'>
                             <a
-                                href='{{answerUrl}}'
-                                target='_blank'
-                                class='btn btn-success'
-                            >Answer</a>
-                        {{/if}}
-                    </div>
-                    <span
-                        class='text-muted'
-                        style='font-size: 11px;'
-                    >{{updatedAt}}</span>
-                    <p class='card-text mt-2'>{{description}}</p>
-                    <iframe
-                        src='https://www.facebook.com/plugins/post.php?href={{url}}&width=500&show_text=false&height=498&appId'
-                        style='border:none;overflow:hidden'
-                        scrolling='no'
-                        frameborder='0'
-                        allowfullscreen='true'
-                        allow='autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share'
-                    ></iframe>
+                                class='nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow'
+                                href='#'
+                                id='navbarDropdownMenuLink'
+                                role='button'
+                                data-mdb-toggle='dropdown'
+                                aria-expanded='false'
+                            >
+                                <i
+                                    class='fa-solid fa-ellipsis-vertical fa-lg'
+                                ></i>
+                            </a>
+                            <ul
+                                class='dropdown-menu dropdown-menu-end'
+                                aria-labelledby='navbarDropdownMenuLink'
+                            >
+                                <li><a class='dropdown-item' href='#'>Chia sẻ</a></li>
+                                <li><a
+                                        class='dropdown-item'
+                                        href='#'
+                                        data-mdb-toggle='modal'
+                                        data-mdb-target='#editModal'
+                                        onclick="$('#edit-id').val('{{_id}}');
+                                        $('#name').val('{{name}}');"
+                                    >Chỉnh sửa</a></li>
+                                <li><a
+                                        class='dropdown-item'
+                                        href='#'
+                                        data-mdb-toggle='modal'
+                                        data-mdb-target='#deleteModal'
+                                        onclick="$('#delete-id').val('{{_id}}');"
+                                    >Xoá</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <hr />
+
                 </div>
             </div>
         </div>
@@ -61,33 +115,16 @@
                     aria-label='Close'
                 ></button>
             </div>
-            <form method='post' action='/posts' class='mb-0'>
+            <form method='post' action='/course/create' class='mb-0'>
                 <div class='modal-body'>
                     <div class='form-outline mb-4'>
                         <input
                             type='text'
                             name='name'
                             class='form-control'
-                        />
-                        <label class='form-label' for='desc'>Tên</label>
-                    </div>
-                    <div class='form-outline mb-4'>
-                        <input
-                            type='text'
-                            name='answerUrl'
-                            class='form-control'
-                        />
-                        <label class='form-label' for='answer'>Link đáp án</label>
-                    </div>
-
-                    <div class='form-outline mb-4'>
-                        <input
-                            type='text'
-                            name='url'
-                            class='form-control'
                             required
                         />
-                        <label class='form-label' for='url'>Link hoạt động
+                        <label class='form-label' for='desc'>Tên
                             <span class='text-danger'>*</span></label>
                     </div>
                 </div>
@@ -98,6 +135,88 @@
                         data-mdb-dismiss='modal'
                     >Đóng</button>
                     <button type='submit' class='btn btn-primary'>Thêm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div
+    class='modal fade'
+    id='editModal'
+    tabindex='-1'
+    aria-labelledby='exampleModalLabel'
+    aria-hidden='true'
+>
+    <div class='modal-dialog'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <h5 class='modal-title' id='exampleModalLabel'>Chỉnh sửa môn học</h5>
+                <button
+                    type='button'
+                    class='btn-close'
+                    data-mdb-dismiss='modal'
+                    aria-label='Close'
+                ></button>
+            </div>
+            <form method='post' action='/course/update' class='mb-0'>
+                <div class='modal-body'>
+                    <input type='hidden' name='id' id='edit-id' />
+                    <div class='form-outline mb-4'>
+                        <input
+                            type='text'
+                            name='name'
+                            id="name"
+                            class='form-control'
+                            required
+                        />
+                        <label class='form-label' for='desc'>Tên
+                            <span class='text-danger'>*</span></label>
+                    </div>
+                </div>
+                <div class='modal-footer'>
+                    <button
+                        type='button'
+                        class='btn btn-secondary'
+                        data-mdb-dismiss='modal'
+                    >Đóng</button>
+                    <button type='submit' class='btn btn-primary'>Cập nhật</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div
+    class='modal fade'
+    id='deleteModal'
+    tabindex='-1'
+    aria-labelledby='exampleModalLabel'
+    aria-hidden='true'
+>
+    <div class='modal-dialog'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <h5 class='modal-title' id='exampleModalLabel'>Xoá môn học</h5>
+                <button
+                    type='button'
+                    class='btn-close'
+                    data-mdb-dismiss='modal'
+                    aria-label='Close'
+                ></button>
+            </div>
+            <form method='post' action='/course/delete' class='mb-0'>
+                <div class='modal-body'>
+                    <input type='hidden' name='id' id='delete-id' />
+                    <p>Bạn có muốn xoá môn học này?</p>
+                </div>
+                <div class='modal-footer'>
+                    <button
+                        type='button'
+                        class='btn btn-secondary'
+                        data-mdb-dismiss='modal'
+                    >Đóng</button>
+                    <button type='submit' class='btn btn-danger'>Xoá</button>
                 </div>
             </form>
         </div>

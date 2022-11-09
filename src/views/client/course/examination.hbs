@@ -1,0 +1,84 @@
+<nav aria-label='breadcrumb' class='bg-light shadow rounded-3 p-3 mb-4'>
+    <ol class='breadcrumb mb-0'>
+        <li class='breadcrumb-item'><a href='#'>Home</a></li>
+        <li class='breadcrumb-item'><a href='#'>User</a></li>
+        <li class='breadcrumb-item active' aria-current='page'>User Profile</li>
+    </ol>
+</nav>
+<div class='d-flex align-items-center'>
+    <h2 class='me-auto'>Lịch sử đảng</h2>
+    <a href='#' class='h5' data-mdb-toggle='modal' data-mdb-target='#editModal'>
+        <i class='fa-solid fa-pen-to-square fa-lg'></i>
+    </a>
+</div>
+<hr class='mt-0' />
+<p>
+    hello world
+</p>
+
+<div
+    class='modal fade'
+    id='editModal'
+    tabindex='-1'
+    aria-labelledby='exampleModalLabel'
+    aria-hidden='true'
+>
+    <div class='modal-dialog'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <h5 class='modal-title' id='exampleModalLabel'>Chỉnh sửa bài
+                    viết</h5>
+                <button
+                    type='button'
+                    class='btn-close'
+                    data-mdb-dismiss='modal'
+                    aria-label='Close'
+                ></button>
+            </div>
+            <form method='post' action='/posts/update' class='mb-0'>
+                <div class='modal-body'>
+                    <div class='form-outline mb-4'>
+                        <input
+                            type='text'
+                            id='title'
+                            name='title'
+                            class='form-control'
+                            required
+                        />
+                        <label class='form-label' for='title'>Tiêu đề
+                            <span class='text-danger'>*</span></label>
+                    </div>
+                    <input type='hidden' name='id' id='edit-id' />
+                    <div class='form-outline mb-4'>
+                        <label class='form-label' for='answer'>Nội dung</label>
+                        <textarea
+                            id='content'
+                            name='content'
+                            class='tiny'
+                        ></textarea>
+                    </div>
+                    <div class='mb-4'>
+                        <label class='form-label' for='title'>Ngày kiểm tra
+                            <span class='text-danger'>*</span></label>
+                        <input
+                            type='datetime-local'
+                            id='time'
+                            name='time'
+                            class='form-control'
+                            required
+                        />
+                        
+                    </div>
+                </div>
+                <div class='modal-footer'>
+                    <button
+                        type='button'
+                        class='btn btn-secondary'
+                        data-mdb-dismiss='modal'
+                    >Đóng</button>
+                    <button type='submit' class='btn btn-primary'>Cập nhật</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

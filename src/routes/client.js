@@ -3,15 +3,16 @@ const router = express.Router();
 
 const postRouter = require('./post');
 const calendarRouter = require('./calendar');
-const tradeRouter = require('./trade');
+const marketRouter = require('./market');
 const courseRouter = require('./course');
 
 const { clientController } = require('../controllers');
 
-router.use('/', courseRouter);
+// Current path: /
 router.get('/profile', clientController.profile);
 router.use('/posts', postRouter);
 router.use('/calendar', calendarRouter);
-router.use('/market', tradeRouter);
+router.use('/market', marketRouter);
+router.use('/', courseRouter);
 
 module.exports = router;

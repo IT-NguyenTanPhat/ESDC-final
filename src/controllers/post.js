@@ -61,10 +61,8 @@ const postController = {
 
     delete: catchAsync(async (req, res) => {
         const { id } = req.body;
-        const user = req.cookies.user;
         const post = await postService.getOne({ _id: id });
-        console.log(user, post);
-        if (!user || !post) {
+        if (!post) {
             req.flash('error', 'Xoá bài viết thất bại');
             return res.redirect('/profile');
         }

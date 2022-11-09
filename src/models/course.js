@@ -8,13 +8,13 @@ const Course = new Schema({
     },
     materials: [
         {
-            name: String,
+            title: String,
             content: String,
         },
     ],
     examinations: [
         {
-            name: String,
+            title: String,
             content: String,
             time: Date,
         },

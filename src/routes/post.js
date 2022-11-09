@@ -3,8 +3,9 @@ const router = express.Router();
 
 const { postController } = require('../controllers');
 
+// Current path: /posts
 router.get('/', postController.index);
-router.post('/', postController.create);
+router.post('/create', postController.create);
 router.post('/update', postController.update);
 router.post('/censor', postController.censor);
 router.post('/delete', postController.delete);
