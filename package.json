@@ -1,23 +1,29 @@
 {
-  "name": "final",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "start": "nodemon ./bin/www"
-  },
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "express": "~4.16.1",
-    "express-handlebars": "^6.0.6",
-    "express-session": "^1.17.3",
-    "hbs": "~4.0.4",
-    "http-errors": "~1.6.3",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.7.0",
-    "morgan": "~1.9.1",
-    "nodemon": "^2.0.20",
-    "req-flash": "^0.0.3"
-  }
+	"name": "final",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"start": "nodemon ./bin/www",
+		"create-sample-data": "node sample-data"
+	},
+	"dependencies": {
+		"bcryptjs": "^2.4.3",
+		"cookie-parser": "~1.4.4",
+		"crypto": "^1.0.1",
+		"debug": "~2.6.9",
+		"express": "~4.16.1",
+		"express-handlebars": "^6.0.6",
+		"express-session": "^1.17.3",
+		"google-auth-library": "^8.6.0",
+		"hbs": "~4.0.4",
+		"http-errors": "~1.6.3",
+		"jsonwebtoken": "^8.5.1",
+		"mongoose": "^6.7.0",
+		"morgan": "~1.9.1",
+		"node-cron": "^3.0.2",
+		"nodemailer": "^6.8.0",
+		"nodemon": "^2.0.20",
+		"redis": "^4.4.0",
+		"req-flash": "^0.0.3"
+	}
 }
