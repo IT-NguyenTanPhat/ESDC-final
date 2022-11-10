@@ -1,8 +1,9 @@
 module.exports = {
-	userService: require('./user'),
-	postService: require('./post'),
-	courseService: require('./course'),
-	emailService: require('./email'),
-	redisService: require('./redis'),
-	denounceService: require('./denounce'),
+    userService: require('./user'),
+    postService: require('./post'),
+    marketService: require('./market'),
+    courseService: require('./course'),
+    emailService: require('./email'),
+    redisService: require('./redis'),
+    denounceService: require('./denounce'),
 };

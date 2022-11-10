@@ -1,6 +1,7 @@
 module.exports = {
-	userModel: require('./user'),
-	postModel: require('./post'),
-	courseModel: require('./course'),
-	denounceModel: require('./denounce'),
+    userModel: require('./user'),
+    postModel: require('./post'),
+    marketModel: require('./market'),
+    courseModel: require('./course'),
+    denounceModel: require('./denounce'),
 };

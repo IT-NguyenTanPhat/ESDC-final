@@ -64,7 +64,7 @@
                                 href='#'
                                 data-mdb-toggle='modal'
                                 data-mdb-target='#createExamModal'
-                            ><i class='fa-solid fa-calendar-plus me-1'></i></i> Kiểm tra</a></li>
+                            ><i class='fa-solid fa-calendar-plus me-1'></i></i> Lịch kiểm tra</a></li>
                     </ul>
                 </div>
             </div>
@@ -86,7 +86,7 @@
                         href='#'
                         data-mdb-toggle='modal'
                         data-mdb-target='#deleteNoteModal'
-                        onclick="$('#delete-note-idx').val('{{@index}}');">
+                        onclick="$('#delete-note-idx').val('{{_id}}');">
                         <i class="fa-solid fa-trash"></i>
                     </a>
                 </div>
@@ -109,7 +109,7 @@
                         href='#'
                         data-mdb-toggle='modal'
                         data-mdb-target='#deleteExamModal'
-                        onclick="$('#delete-exam-idx').val('{{@index}}');">
+                        onclick="$('#delete-exam-idx').val('{{_id}}');">
                         <i class="fa-solid fa-trash"></i>
                     </a>
                 </div>
@@ -262,7 +262,7 @@
             <form method='post' action='/course/material/delete' class='mb-0'>
                 <div class='modal-body'>
                     <input type="hidden" name="id" value="{{course._id}}">
-                    <input type='hidden' name='idx' id='delete-note-idx' />
+                    <input type='hidden' name='itemId' id='delete-note-idx' />
                     <p>Bạn có muốn xoá ghi chú này?</p>
                 </div>
                 <div class='modal-footer'>
@@ -299,7 +299,7 @@
             <form method='post' action='/course/examination/delete' class='mb-0'>
                 <div class='modal-body'>
                     <input type="hidden" name="id" value="{{course._id}}">
-                    <input type='hidden' name='idx' id='delete-exam-idx' />
+                    <input type='hidden' name='itemId' id='delete-exam-idx' />
                     <p>Bạn có muốn xoá lịch kiểm tra này?</p>
                 </div>
                 <div class='modal-footer'>
