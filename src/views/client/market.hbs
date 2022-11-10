@@ -1,0 +1,68 @@
+<div class='rounded bg-white shadow p-2 mb-3'>
+    <div class='input-group w-50'>
+        <div class='form-outline'>
+            <input type='search' id='form1' class='form-control' />
+            <label class='form-label' for='form1'>Search</label>
+        </div>
+        <button type='button' class='btn btn-primary'>
+            <i class='fas fa-search'></i>
+        </button>
+    </div>
+</div>
+
+<div class='row'>
+    {{#each posts}}
+        <div class='col-5 mb-3'>
+            <div class='card'>
+                <div class='card-body'>
+                    <ul
+                        class='navbar-nav mb-1 ms-auto d-flex flex-row justify-content-between align-items-center'
+                    >
+                        <h5 class='card-title mb-0'>{{author.name}}</h5>
+                        <li class='nav-item dropdown'>
+                            <a
+                                class='nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow'
+                                href='#'
+                                id='navbarDropdownMenuLink'
+                                role='button'
+                                data-mdb-toggle='dropdown'
+                                aria-expanded='false'
+                            >
+                                <i class='fa-solid fa-ellipsis-vertical fa-lg'></i>
+                            </a>
+                            <ul
+                                class='dropdown-menu dropdown-menu-end'
+                                aria-labelledby='navbarDropdownMenuLink'
+                            >
+                                <li><a
+                                        class='dropdown-item'
+                                        href='#'
+                                    >Báo cáo</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <span
+                        class='text-muted'
+                        style='font-size: 11px;'
+                    >{{updatedAt}}</span> <br>
+                    {{#if answerUrl}}
+                        <a
+                            href='{{answerUrl}}'
+                            target='_blank'
+                            class='btn btn-success mt-2'
+                        >Answer</a>
+                    {{/if}}
+                    <p class='card-text mt-2'>{{description}}</p>
+                    <iframe
+                        src='https://www.facebook.com/plugins/post.php?href={{url}}&width=500&show_text=false&height=498&appId'
+                        style='border:none;overflow:hidden'
+                        scrolling='no'
+                        frameborder='0'
+                        allowfullscreen='true'
+                        allow='autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share'
+                    ></iframe>
+                </div>
+            </div>
+        </div>
+    {{/each}}
+</div>

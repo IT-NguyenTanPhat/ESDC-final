@@ -1,21 +1,32 @@
 <nav aria-label='breadcrumb' class='bg-light shadow rounded-3 p-3 mb-4'>
     <ol class='breadcrumb mb-0'>
         <li class='breadcrumb-item'><a href='/'>Môn học</a></li>
-        <li class='breadcrumb-item'><a href='/{{course._id}}'>{{course.name}}</a></li>
-        <li class='breadcrumb-item active' aria-current='page'>{{course.materials.title}}</li>
+        <li class='breadcrumb-item'><a
+                href='/{{course._id}}'
+            >{{course.name}}</a></li>
+        <li
+            class='breadcrumb-item active'
+            aria-current='page'
+        >{{course.materials.title}}</li>
     </ol>
 </nav>
+{{#with course.materials}}
 <div class='d-flex align-items-center'>
-    <h2 class='me-auto'>{{course.materials.title}}</h2>
-    <a href='#' class='h5' data-mdb-toggle='modal' data-mdb-target='#editModal'>
+    <h2 class='me-auto'>{{title}}</h2>
+    <a
+        href='#'
+        class='h5'
+        data-mdb-toggle='modal'
+        data-mdb-target='#editModal'
+    >
         <i class='fa-solid fa-pen-to-square fa-lg'></i>
     </a>
 </div>
 <hr class='mt-0' />
 <div>
-    {{{course.materials.content}}}
+    {{{content}}}
 </div>
-
+{{/with}}
 <div
     class='modal fade'
     id='editModal'
@@ -26,8 +37,7 @@
     <div class='modal-dialog'>
         <div class='modal-content'>
             <div class='modal-header'>
-                <h5 class='modal-title' id='exampleModalLabel'>Chỉnh sửa bài
-                    viết</h5>
+                <h5 class='modal-title' id='exampleModalLabel'>Chỉnh sửa ghi chú</h5>
                 <button
                     type='button'
                     class='btn-close'
@@ -35,29 +45,30 @@
                     aria-label='Close'
                 ></button>
             </div>
-            <form method='post' action='/posts/update' class='mb-0'>
+            <form method='post' action='/course/material/update' class='mb-0'>
                 <div class='modal-body'>
+                    <input type="hidden" name="id" value="{{course._id}}">
+                    {{#with course.materials}}
+                    <input type="hidden" name="itemId" value="{{_id}}">
                     <div class='form-outline mb-4'>
                         <input
                             type='text'
-                            id='title'
                             name='title'
                             class='form-control'
+                            value="{{title}}"
                             required
                         />
                         <label class='form-label' for='title'>Tiêu đề
                             <span class='text-danger'>*</span></label>
                     </div>
-                    <input type='hidden' name='id' id='edit-id' />
                     <div class='form-outline mb-4'>
                         <label class='form-label' for='answer'>Nội dung</label>
                         <textarea
-                            id='content'
                             name='content'
                             class='tiny'
-                        ></textarea>
+                        >{{{content}}}</textarea>
                     </div>
-
+                    {{/with}}
                 </div>
                 <div class='modal-footer'>
                     <button

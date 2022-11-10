@@ -57,15 +57,7 @@
         </div>
     </div>
 </div>
-<div class='rounded p-2 px-3 d-flex justify-content-between align-items-center'>
-    <h4 class='m-0'>Bài viết của tôi</h4>
-    <button
-        class='btn btn-success'
-        data-mdb-toggle='modal'
-        data-mdb-target='#createModal'
-    >+ Đăng bài viết</button>
-</div>
-<hr class='mt-0' />
+
 {{#if message.error}}
     <div
         class='alert alert-dismissible fade show alert-danger w-50'
@@ -99,6 +91,15 @@
         ></button>
     </div>
 {{/if}}
+<div class='rounded p-2 px-3 d-flex justify-content-between align-items-center'>
+    <h4 class='m-0'>Bài viết điểm rèn luyện</h4>
+    <button
+        class='btn btn-success'
+        data-mdb-toggle='modal'
+        data-mdb-target='#createModal'
+    >+ Đăng bài viết</button>
+</div>
+<hr class='mt-0' />
 
 <div class='row'>
     {{#each posts}}
@@ -124,7 +125,9 @@
                                 data-mdb-toggle='dropdown'
                                 aria-expanded='false'
                             >
-                                <i class='fa-solid fa-ellipsis-vertical fa-lg'></i>
+                                <i
+                                    class='fa-solid fa-ellipsis-vertical fa-lg'
+                                ></i>
                             </a>
                             <ul
                                 class='dropdown-menu dropdown-menu-end'
@@ -171,6 +174,83 @@
                         allowfullscreen='true'
                         allow='autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share'
                     ></iframe>
+                </div>
+            </div>
+        </div>
+    {{/each}}
+</div>
+
+<div class='rounded p-2 px-3 d-flex justify-content-between align-items-center'>
+    <h4 class='m-0'>Bài viết mua &amp; bán</h4>
+    <button
+        class='btn btn-success'
+        data-mdb-toggle='modal'
+        data-mdb-target='#createMarketModal'
+    >+ Đăng bài viết</button>
+</div>
+<hr class='mt-0' />
+
+<div class='row'>
+    {{#each marketPosts}}
+        <div class='col-5 mb-3'>
+            <div class='card h-100'>
+                <div class='card-body'>
+                    <ul
+                        class='navbar-nav mb-1 ms-auto d-flex flex-row justify-content-between align-items-center'
+                    >
+                        <h5 class='card-title mb-0'>{{author.name}}</h5>
+                        {{#equal status 'pending'}}
+                            <span class='text-warning'><i
+                                    class='fa-solid fa-spinner'
+                                ></i>
+                                Chờ kiểm duyệt</span>
+                        {{/equal}}
+                        <li class='nav-item dropdown'>
+                            <a
+                                class='nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow'
+                                href='#'
+                                id='navbarDropdownMenuLink'
+                                role='button'
+                                data-mdb-toggle='dropdown'
+                                aria-expanded='false'
+                            >
+                                <i
+                                    class='fa-solid fa-ellipsis-vertical fa-lg'
+                                ></i>
+                            </a>
+                            <ul
+                                class='dropdown-menu dropdown-menu-end'
+                                aria-labelledby='navbarDropdownMenuLink'
+                            >
+                                <li><a
+                                        class='dropdown-item'
+                                        href='#'
+                                        data-mdb-toggle='modal'
+                                        data-mdb-target='#editMarketModal'
+                                        onclick="
+                                            $('#edit-market-id').val('{{_id}}');
+                                            $('#content').val('{{content}}');
+                                            $('#phone2').val('{{phone}}');"
+                                    >Chỉnh sửa</a></li>
+                                <li><a
+                                        class='dropdown-item'
+                                        href='#'
+                                        data-mdb-toggle='modal'
+                                        data-mdb-target='#deleteMarketModal'
+                                        onclick="$('#delete-market-id').val('{{_id}}');"
+                                    >Xoá</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <span
+                        class='text-muted'
+                        style='font-size: 11px;'
+                    >{{updatedAt}}</span><br />
+                    <p class='card-text mt-2'>{{content}}</p>
+                    <p><strong>{{phone}}</strong></p>
+                    {{#each images}}
+                        <a href="{{this}}" target="_blank"><img src="{{this}}" width="45%" alt=""></a>
+                    {{/each}}
                 </div>
             </div>
         </div>
@@ -339,3 +419,209 @@
         </div>
     </div>
 </div>
+
+<div
+    class='modal fade'
+    id='createMarketModal'
+    tabindex='-1'
+    aria-labelledby='exampleModalLabel'
+    aria-hidden='true'
+>
+    <div class='modal-dialog'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <h5 class='modal-title' id='exampleModalLabel'>Đăng bài viết</h5>
+                <button
+                    type='button'
+                    class='btn-close'
+                    data-mdb-dismiss='modal'
+                    aria-label='Close'
+                ></button>
+            </div>
+            <form method='post' action='/market/create' class='mb-0' id="form1">
+                <div class='modal-body'>
+                    <div class='form-outline mb-4'>
+                        <textarea
+                            name='content'
+                            class='form-control'
+                        ></textarea>
+                        <label class='form-label' for='desc'>Nội dung</label>
+                    </div>
+                    <div class='form-outline mb-4'>
+                        <input
+                            type='text'
+                            name='phone1'
+                            class='form-control'
+                            required
+                        />
+                        <label class='form-label' for='answer'>Số điện thoại
+                            liên hệ
+                            <span class='text-danger'>*</span></label>
+                    </div>
+
+                    <div class='mb-4'>
+                        <label class='form-label' for='url'>Hình ảnh</label>
+                        <input type="hidden" name="images" id="images1">
+                        <input type="file" class='form-control' id="pictureInput1" multiple />
+                    </div>
+                </div>
+                <div class='modal-footer'>
+                    <button
+                        type='button'
+                        class='btn btn-secondary'
+                        data-mdb-dismiss='modal'
+                    >Đóng</button>
+                    <button type='submit' class='btn btn-primary'>Đăng</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div
+    class='modal fade'
+    id='editMarketModal'
+    tabindex='-1'
+    aria-labelledby='exampleModalLabel'
+    aria-hidden='true'
+>
+    <div class='modal-dialog'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <h5 class='modal-title' id='exampleModalLabel'>Chỉnh sửa bài
+                    viết</h5>
+                <button
+                    type='button'
+                    class='btn-close'
+                    data-mdb-dismiss='modal'
+                    aria-label='Close'
+                ></button>
+            </div>
+            <form method='post' action='/market/update' class='mb-0' id="form2">
+                <div class='modal-body'>
+                    <input type='hidden' name='id' id='edit-market-id' />
+                    <div class='form-outline mb-4'>
+                        <textarea
+                            id="content"
+                            name='content'
+                            class='form-control'
+                        ></textarea>
+                        <label class='form-label' for='desc'>Nội dung</label>
+                    </div>
+                    <div class='form-outline mb-4'>
+                        <input
+                            type='text'
+                            id='phone2'
+                            name='phone'
+                            class='form-control'
+                            required
+                        />
+                        <label class='form-label' for='answer'>Số điện thoại liên hệ <span class='text-danger'>*</span></label>
+                    </div>
+                    <div class='mb-4'>
+                        <label class='form-label' for='url'>Hình ảnh</label>
+                        <input type="hidden" name="images" id="images2">
+                        <input type="file" class='form-control' id="pictureInput2" multiple />
+                    </div>
+                </div>
+                <div class='modal-footer'>
+                    <button
+                        type='button'
+                        class='btn btn-secondary'
+                        data-mdb-dismiss='modal'
+                    >Đóng</button>
+                    <button type='submit' class='btn btn-primary'>Cập nhật</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div
+    class='modal fade'
+    id='deleteMarketModal'
+    tabindex='-1'
+    aria-labelledby='exampleModalLabel'
+    aria-hidden='true'
+>
+    <div class='modal-dialog'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <h5 class='modal-title' id='exampleModalLabel'>Xoá bài viết</h5>
+                <button
+                    type='button'
+                    class='btn-close'
+                    data-mdb-dismiss='modal'
+                    aria-label='Close'
+                ></button>
+            </div>
+            <form method='post' action='/market/delete' class='mb-0'>
+                <div class='modal-body'>
+                    <input type='hidden' name='id' id='delete-market-id' />
+                    <p>Bạn có muốn xoá bài viết này?</p>
+                </div>
+                <div class='modal-footer'>
+                    <button
+                        type='button'
+                        class='btn btn-secondary'
+                        data-mdb-dismiss='modal'
+                    >Đóng</button>
+                    <button type='submit' class='btn btn-danger'>Xoá</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    let myFiles = {};
+    let isFilesReady = true;
+
+    $('#pictureInput1, #pictureInput2').change(async (event) => {
+        myFiles = {};
+        isFilesReady = false;
+
+        const inputKey = $(this).attr("name");
+        var files = event.target.files;
+
+        const filePromises = Object.entries(files).map((item) => {
+            return new Promise((resolve, reject) => {
+                const [index, file] = item;
+                const reader = new FileReader();
+                reader.readAsBinaryString(file);
+
+                reader.onload = function (event) {
+                    $('#images1, #images2').val($('#images1, #images2').val() +
+                    `data:${file.type};base64,${btoa(event.target.result)} `);
+                    console.log(`data:${file.type};base64,${btoa(event.target.result)} `)
+                    resolve();
+                };
+                reader.onerror = function () {
+                    console.log("can't read the file");
+                    reject();
+                };
+            });
+        });
+
+        Promise.all(filePromises)
+            .then(() => {
+                isFilesReady = true;
+            })
+            .catch((error) => {
+                console.log(error);
+                console.log("something wrong happened");
+            });
+    });
+
+    $('#form2, #form2').submit(async (event) => {
+        if ($('#phone1, #phone2').val().length != 10) {
+            event.preventDefault();
+            alert("Số điện thoại không hợp lệ");
+        }
+        if (!isFilesReady) {
+            event.preventDefault();
+            alert("files still getting processed");
+            return;
+        }
+    })
+</script>

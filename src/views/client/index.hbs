@@ -88,8 +88,15 @@
                             </ul>
                         </li>
                     </ul>
-                    <hr />
-
+                    <hr />  
+                    <div>
+                        {{#each examinations}}
+                        <div class="d-flex">
+                            <p class="me-auto"><strong>{{title}}</strong></p>
+                            <p>{{time}}</p>
+                        </div>
+                        {{/each}}
+                    </div>
                 </div>
             </div>
         </div>
