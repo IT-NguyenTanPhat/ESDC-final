@@ -7,6 +7,7 @@ const { postController } = require('../controllers');
 router.get('/', postController.index);
 router.post('/create', postController.create);
 router.post('/update', postController.update);
+router.post('/un-spam', postController.unSpam);
 router.post('/censor', postController.censor);
 router.post('/delete', postController.delete);
 

@@ -6,5 +6,4 @@ module.exports = {
 	courseController: require('./course'),
 	calendarController: require('./calendar'),
 	marketController: require('./market'),
-	userController: require('./user'),
 };

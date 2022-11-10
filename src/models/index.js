@@ -3,5 +3,4 @@ module.exports = {
     postModel: require('./post'),
     marketModel: require('./market'),
     courseModel: require('./course'),
-    denounceModel: require('./denounce'),
 };

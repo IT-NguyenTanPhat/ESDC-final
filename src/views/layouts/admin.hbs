@@ -1,9 +1,14 @@
-<html>
-    <head>
-        <title>{{title}}</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
         {{> css}}
-    </head>
-    <body>
+        {{> javascript}}
+</head>
+<body>
         <header>
             <!-- Sidebar -->
             <nav
@@ -17,10 +22,17 @@
                             class='list-group-item list-group-item-action py-2 ripple active'
                         ><i class='fas fa-chart-bar fa-fw me-3'></i><span>Kiểm duyệt bài viết</span></a>
                         <a
-                            href='/admin'
+                            href='/admin/market'
+                            class='list-group-item list-group-item-action py-2 ripple'
+                        ><i class="fa-solid fa-shopping-cart me-3"></i><span>Kiểm duyệt mua bán</span></a>
+                        <a
+                            href='/admin/spam'
                             class='list-group-item list-group-item-action py-2 ripple'
                         ><i class="fa-solid fa-ban me-3"></i><span>Spam</span></a>
-                        
+                        <a
+                            href='/admin/banned'
+                            class='list-group-item list-group-item-action py-2 ripple'
+                        ><i class="fa-solid fa-user-slash me-3"></i><span>Người dùng đã cấm</span></a>
                     </div>
                 </div>
             </nav>
@@ -130,5 +142,4 @@
         type='text/javascript'
         src='https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.js'
     ></script>
-    {{> javascript}}
 </html>

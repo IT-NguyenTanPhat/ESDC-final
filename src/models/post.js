@@ -15,9 +15,14 @@ const Post = new Schema(
             type: String,
             required: true,
         },
+        isSpam: {
+            type: Boolean,
+            default: false,
+        },
         status: {
             type: String,
             enum: ['pending', 'success'],
+            default: 'pending',
         },
     },
     {

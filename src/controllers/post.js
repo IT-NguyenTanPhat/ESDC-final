@@ -1,9 +1,12 @@
 const catchAsync = require('../utils/catchAsync');
-const { postService } = require('../services');
+const { postService, userService } = require('../services');
 
 const postController = {
     index: catchAsync(async (req, res) => {
-        const posts = await postService.get({ status: 'success' });
+        const posts = await postService.get({
+            status: 'success',
+            description: { $regex: req.query.search || '', $options: 'i' },
+        });
         res.render('client/post', {
             title: 'Điểm rèn luyện',
             posts,
@@ -18,7 +21,7 @@ const postController = {
             return res.redirect('/profile');
         }
         await postService
-            .create({ ...req.body, author: user._id, status: 'pending' })
+            .create({ ...req.body, author: user._id })
             .catch((err) => {
                 req.flash('error', 'Đăng bài viết thất bại');
                 return res.redirect('/profile');
@@ -40,6 +43,23 @@ const postController = {
         });
         req.flash('success', 'Cập nhật bài viết thành công');
         res.redirect('/profile');
+    }),
+
+    unSpam: catchAsync(async (req, res) => {
+        const { id } = req.body;
+        const post = await postService.getOne({ _id: id });
+        if (!post) {
+            req.flash('error', 'Gỡ spam thất bại');
+            return res.redirect('back');
+        }
+        await postService
+            .update({ _id: id }, { isSpam: false })
+            .catch((err) => {
+                req.flash('error', 'Gỡ spam thất bại');
+                return res.redirect('back');
+            });
+        req.flash('success', 'Gỡ spam thành công');
+        res.redirect('back');
     }),
 
     censor: catchAsync(async (req, res) => {
@@ -64,14 +84,22 @@ const postController = {
         const post = await postService.getOne({ _id: id });
         if (!post) {
             req.flash('error', 'Xoá bài viết thất bại');
-            return res.redirect('/profile');
+            return res.redirect('/back');
+        }
+        if (req.body.banId) {
+            await userService
+                .update({ _id: req.body.banId }, { status: 'banned' })
+                .catch((err) => {
+                    req.flash('error', 'Cấm người dùng thất bại');
+                    return res.redirect('/back');
+                });
         }
         await postService.delete({ _id: id }).catch((err) => {
             req.flash('error', 'Xoá bài viết thất bại');
-            return res.redirect('/profile');
+            return res.redirect('/back');
         });
         req.flash('success', 'Xoá bài viết thành công');
-        res.redirect('/profile');
+        res.redirect('/back');
     }),
 };
 

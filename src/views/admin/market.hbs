@@ -1,0 +1,91 @@
+{{#if message.error}}
+    <div
+        class='alert alert-dismissible fade show alert-danger w-50'
+        role='alert'
+        data-mdb-color='warning'
+        id='customxD'
+    >
+        <i class='fas fa-times-circle me-3'></i>{{message.error}}
+        <button
+            type='button'
+            class='btn-close'
+            data-mdb-dismiss='alert'
+            aria-label='Close'
+        ></button>
+    </div>
+{{/if}}
+
+{{#if message.success}}
+    <div
+        class='alert alert-dismissible fade show alert-success w-50'
+        role='alert'
+        data-mdb-color='warning'
+        id='customxD'
+    >
+        <i class='fas fa-check-circle me-3'></i>{{message.success}}
+        <button
+            type='button'
+            class='btn-close'
+            data-mdb-dismiss='alert'
+            aria-label='Close'
+        ></button>
+    </div>
+{{/if}}
+<div class='row'>
+    {{#each posts}}
+        <div class='col-5 mb-3'>
+            <div class='card h-100'>
+                <div class='card-body'>
+                    <div class='d-flex justify-content-between'>
+                        <h5 class='card-title mb-1'>{{author.name}}</h5>
+                        <span class='text-warning'><i
+                                class='fa-solid fa-spinner'
+                            ></i>
+                            Chờ kiểm duyệt</span>
+                    </div>
+                    <span
+                        class='text-muted'
+                        style='font-size: 11px;'
+                    >{{updatedAt}}</span><br />
+                    <p class='card-text mt-2'>{{content}}</p>
+                    <p><strong>{{phone}}</strong></p>
+                    {{#each images}}
+                        <a href="{{this}}" target="_blank"><img src="{{this}}" width="45%" alt=""></a>
+                    {{/each}}
+                    <hr />
+                    <div class='row'>
+                        <div class='col'><form
+                                action='/market/delete'
+                                method='post'
+                                class='mb-0'
+                            >
+                                <input
+                                    type='hidden'
+                                    name='id'
+                                    value='{{_id}}'
+                                />
+                                <button
+                                    type='submit'
+                                    class='btn btn-outline-danger w-100'
+                                >Xoá</button>
+                            </form></div>
+                        <div class='col'><form
+                                action='/market/censor'
+                                method='post'
+                                class='mb-0'
+                            >
+                                <input
+                                    type='hidden'
+                                    name='id'
+                                    value='{{_id}}'
+                                />
+                                <button
+                                    type='submit'
+                                    class='btn btn-success w-100'
+                                >Duyệt</button></form></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{/each}}
+</div>

@@ -1,0 +1,46 @@
+<link
+    rel='stylesheet'
+    type='text/css'
+    href='https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css'
+/>
+<section class='p-4 shadow rounded'>
+    <table id='table_id' class='display'>
+        <thead>
+            <tr>
+                <th>Tên</th>
+                <th>Email</th>
+                <th>Ngày cấm</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each users}}
+            <tr>
+                <td>{{name}}</td>
+                <td>{{email}}</td>
+                <td>{{bannedAt}}</td>
+                <td>
+                    <form action="/admin/unlock-user">
+                        <input type="hidden" name="id" value="{{_id}}">
+                        <button type="submit"
+                            class="btn btn-success"
+                        >
+                        Gỡ chặn   
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody
+    </table>
+</section>
+
+<script
+    type='text/javascript'
+    charset='utf8'
+    src='https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js'
+></script>
+
+<script>
+    $(document).ready( function () { $('#table_id').DataTable(); } );
+</script>

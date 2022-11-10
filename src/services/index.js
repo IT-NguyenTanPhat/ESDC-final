@@ -5,5 +5,4 @@ module.exports = {
     courseService: require('./course'),
     emailService: require('./email'),
     redisService: require('./redis'),
-    denounceService: require('./denounce'),
 };

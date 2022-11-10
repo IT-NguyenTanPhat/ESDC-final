@@ -1,0 +1,124 @@
+{{#if message.error}}
+    <div
+        class='alert alert-dismissible fade show alert-danger w-50'
+        role='alert'
+        data-mdb-color='warning'
+        id='customxD'
+    >
+        <i class='fas fa-times-circle me-3'></i>{{message.error}}
+        <button
+            type='button'
+            class='btn-close'
+            data-mdb-dismiss='alert'
+            aria-label='Close'
+        ></button>
+    </div>
+{{/if}}
+
+{{#if message.success}}
+    <div
+        class='alert alert-dismissible fade show alert-success w-50'
+        role='alert'
+        data-mdb-color='warning'
+        id='customxD'
+    >
+        <i class='fas fa-check-circle me-3'></i>{{message.success}}
+        <button
+            type='button'
+            class='btn-close'
+            data-mdb-dismiss='alert'
+            aria-label='Close'
+        ></button>
+    </div>
+{{/if}}
+<div class='row'>
+    {{#each posts}}
+        <div class='col-5 mb-3'>
+            <div class='card'>
+                <div class='card-body'>
+                    <div class='d-flex justify-content-between'>
+                        <h5 class='card-title mb-1'>{{author.name}}</h5>
+                        <span class='text-warning'><i
+                                class='fa-solid fa-spinner'
+                            ></i>
+                            Chờ kiểm duyệt</span>
+                    </div>
+                    <span
+                        class='text-muted'
+                        style='font-size: 11px;'
+                    >{{updatedAt}}</span><br />
+                    {{#if answerUrl}}
+                        <a
+                            href='{{answerUrl}}'
+                            target='_blank'
+                            class='btn btn-success mt-2'
+                        >Answer</a>
+                    {{/if}}
+                    <p class='card-text mt-2'>{{description}}</p>
+                    <iframe
+                        src='https://www.facebook.com/plugins/post.php?href={{url}}&width=500&show_text=false&height=498&appId'
+                        style='border:none;overflow:hidden'
+                        scrolling='no'
+                        frameborder='0'
+                        allowfullscreen='true'
+                        allow='autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share'
+                    ></iframe>
+                    <hr />
+                    <div class='row'>
+                        <div class='col'><form
+                                action='/posts/un-spam'
+                                method='post'
+                                class='mb-0'
+                            >
+                                <input
+                                    type='hidden'
+                                    name='id'
+                                    value='{{_id}}'
+                                />
+                                <button
+                                    type='submit'
+                                    class='btn btn-outline-primary w-100'
+                                >Gỡ spam</button>
+                            </form></div>
+                    </div>
+                    <div class='row'>
+                        <div class='col'><form
+                                action='/posts/delete'
+                                method='post'
+                                class='mb-0'
+                            >
+                                <input
+                                    type='hidden'
+                                    name='id'
+                                    value='{{_id}}'
+                                />
+                                <button
+                                    type='submit'
+                                    class='btn btn-outline-danger w-100'
+                                >Xoá</button>
+                            </form></div>
+                        <div class='col'><form
+                                action='/posts/delete'
+                                method='post'
+                                class='mb-0'
+                            >
+                                <input
+                                    type='hidden'
+                                    name='id'
+                                    value='{{_id}}'
+                                />
+                                <input
+                                    type='hidden'
+                                    name='banId'
+                                    value='{{../user_id}}'
+                                />
+                                <button
+                                    type='submit'
+                                    class='btn btn-danger w-100'
+                                >Xoá và cấm người dùng</button></form></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{/each}}
+</div>
