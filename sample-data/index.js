@@ -1,16 +1,27 @@
 const mongoose = require('mongoose');
-const { userModel, courseModel } = require('../src/models');
+const {
+	userModel,
+	courseModel,
+	marketModel,
+	postModel,
+} = require('../src/models');
 const users = require('./users-data');
 const courses = require('./courses-data');
+const markets = require('./markets-data');
+const posts = require('./posts-data');
 
 const importData = async () => {
 	await userModel.create(users);
 	await courseModel.create(courses);
+	await marketModel.create(markets);
+	await postModel.create(posts);
 };
 
 const deleteData = async () => {
 	await userModel.deleteMany();
 	await courseModel.deleteMany();
+	await marketModel.deleteMany();
+	await postModel.deleteMany();
 };
 
 const resetData = async () => {

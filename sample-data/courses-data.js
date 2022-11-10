@@ -1,48 +1,25 @@
-// offset here is number of days before the exam you want the system to send mail
-const getCurrentDateHour = () => {
-	const dateObj = new Date();
-	const hour = dateObj.getHours();
-	const date = `${dateObj.getFullYear()}-${
-		dateObj.getMonth() + 1
-	}-${dateObj.getDate()}`;
-
-	const currentDateHour = new Date(date);
-	currentDateHour.setHours(hour);
-	currentDateHour.setDate(currentDateHour.getDate());
-
-	return currentDateHour;
-};
-
 module.exports = [
 	{
-		name: 'XSTK',
-		author: '636b5eecac004120c2b54f2d',
+		name: 'Tư tưởng HCM',
+		author: '636cb9104f308b203437d3e4',
 		examinations: [
 			{
-				title: 'Midterm 1',
-				content: 'Reminder of Thanh 1',
-				time: getCurrentDateHour(),
-			},
-			{
-				title: 'Midterm 1',
-				content: 'Reminder of Thanh 2',
-				time: '2022-11-09T10:00:00.000Z',
+				_id: '636b675ef4aa43cbe47f27b8',
+				title: 'Thi giữa kì',
+				content: '<p>Ôn kĩ phần 2 chương 1</p>',
+				time: '2022-12-01T00:00:00.000+00:00',
 			},
 		],
 	},
 	{
-		name: 'XSTK',
-		author: '636b5eecac004120c2b54f2e',
+		name: 'Tư tưởng Hồ Chí Minh',
+		author: '636b642dea7b88758ed0d54f',
 		examinations: [
 			{
-				title: 'Midterm 1',
-				content: 'Reminder of Tín 1',
-				time: getCurrentDateHour(),
-			},
-			{
-				title: 'Midterm 1',
-				content: 'Reminder of Tín 2',
-				time: getCurrentDateHour(),
+				_id: '636cd7eaf763fdaa92a0ceae',
+				title: 'Giữa kì',
+				content: '<p>Sáng 7h phòng A609</p>',
+				time: '2022-12-01T00:00:00.000+00:00',
 			},
 		],
 	},
