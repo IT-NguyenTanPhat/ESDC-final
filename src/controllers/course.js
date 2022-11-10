@@ -2,34 +2,34 @@ const catchAsync = require('../utils/catchAsync');
 const { courseService } = require('../services');
 
 const courseController = {
-    index: catchAsync(async (req, res) => {
-        const user = req.cookies.user;
-        const message = {
-            error: req.flash('error'),
-            success: req.flash('success'),
-        };
-        const courses = await courseService.get({ author: user._id });
-        res.render('client/index', {
-            title: 'Trang chủ',
-            user,
-            courses,
-            message,
-        });
-    }),
+	index: catchAsync(async (req, res) => {
+		const user = req.cookies.user;
+		const message = {
+			error: req.flash('error'),
+			success: req.flash('success'),
+		};
+		const courses = await courseService.get({ author: user._id });
+		res.render('client/index', {
+			title: 'Trang chủ',
+			user,
+			courses,
+			message,
+		});
+	}),
 
-    detail: catchAsync(async (req, res) => {
-        const message = {
-            error: req.flash('error'),
-            success: req.flash('success'),
-        };
-        const course = await courseService.getOne({ _id: req.params.id });
-        res.render('client/course/index', {
-            title: course.name,
-            user: req.cookies.user,
-            course,
-            message,
-        });
-    }),
+	detail: catchAsync(async (req, res) => {
+		const message = {
+			error: req.flash('error'),
+			success: req.flash('success'),
+		};
+		const course = await courseService.getOne({ _id: req.params.id });
+		res.render('client/course/index', {
+			title: course.name,
+			user: req.cookies.user,
+			course,
+			message,
+		});
+	}),
 
     create: catchAsync(async (req, res) => {
         const user = req.cookies.user;
@@ -97,23 +97,23 @@ const courseController = {
         });
     }),
 
-    createMaterial: catchAsync(async (req, res) => {
-        const { title, id, content } = req.body;
-        const course = await courseService.getOne({ _id: id });
-        if (!title || !course) {
-            req.flash('error', 'Thêm ghi chú thất bại');
-            return res.redirect(`/${id}`);
-        }
-        const material = { title, content };
-        await courseService
-            .update({ _id: id }, { $push: { materials: material } })
-            .catch((err) => {
-                req.flash('error', 'Thêm ghi chú thất bại');
-                return res.redirect(`/${id}`);
-            });
-        req.flash('success', 'Thêm ghi chú thành công');
-        res.redirect(`/${id}`);
-    }),
+	createMaterial: catchAsync(async (req, res) => {
+		const { title, id, content } = req.body;
+		const course = await courseService.getOne({ _id: id });
+		if (!title || !course) {
+			req.flash('error', 'Thêm ghi chú thất bại');
+			return res.redirect(`/${id}`);
+		}
+		const material = { title, content };
+		await courseService
+			.update({ _id: id }, { $push: { materials: material } })
+			.catch((err) => {
+				req.flash('error', 'Thêm ghi chú thất bại');
+				return res.redirect(`/${id}`);
+			});
+		req.flash('success', 'Thêm ghi chú thành công');
+		res.redirect(`/${id}`);
+	}),
 
     updateMaterial: catchAsync(async (req, res) => {
         const { title, id, content, itemId } = req.body;
@@ -157,41 +157,41 @@ const courseController = {
         res.redirect(`/${id}`);
     }),
 
-    examinationView: catchAsync(async (req, res) => {
-        const message = {
-            error: req.flash('error'),
-            success: req.flash('success'),
-        };
-        const course = await courseService.getOne(
-            { _id: req.params.id },
-            'name examinations -author'
-        );
-        course.examinations = course.examinations[req.params.idx];
-        res.render('client/course/examination', {
-            title: course.examinations.title,
-            user: req.cookies.user,
-            course,
-            message,
-        });
-    }),
+	examinationView: catchAsync(async (req, res) => {
+		const message = {
+			error: req.flash('error'),
+			success: req.flash('success'),
+		};
+		const course = await courseService.getOne(
+			{ _id: req.params.id },
+			'name examinations -author'
+		);
+		course.examinations = course.examinations[req.params.idx];
+		res.render('client/course/examination', {
+			title: course.examinations.title,
+			user: req.cookies.user,
+			course,
+			message,
+		});
+	}),
 
-    createExamination: catchAsync(async (req, res) => {
-        const { title, id, content, time } = req.body;
-        const course = await courseService.getOne({ _id: id });
-        if (!title || !course || !time) {
-            req.flash('error', 'Thêm lịch kiểm tra thất bại');
-            return res.redirect(`/${id}`);
-        }
-        const examination = { title, content, time };
-        await courseService
-            .update({ _id: id }, { $push: { examinations: examination } })
-            .catch((err) => {
-                req.flash('error', 'Thêm lịch kiểm tra thất bại');
-                return res.redirect(`/${id}`);
-            });
-        req.flash('success', 'Thêm lịch kiểm tra thành công');
-        res.redirect(`/${id}`);
-    }),
+	createExamination: catchAsync(async (req, res) => {
+		const { title, id, content, time } = req.body;
+		const course = await courseService.getOne({ _id: id });
+		if (!title || !course || !time) {
+			req.flash('error', 'Thêm lịch kiểm tra thất bại');
+			return res.redirect(`/${id}`);
+		}
+		const examination = { title, content, time };
+		await courseService
+			.update({ _id: id }, { $push: { examinations: examination } })
+			.catch((err) => {
+				req.flash('error', 'Thêm lịch kiểm tra thất bại');
+				return res.redirect(`/${id}`);
+			});
+		req.flash('success', 'Thêm lịch kiểm tra thành công');
+		res.redirect(`/${id}`);
+	}),
 
     updateExamination: catchAsync(async (req, res) => {
         const { title, id, content, time, itemId } = req.body;
@@ -236,5 +236,7 @@ const courseController = {
         res.redirect(`/${id}`);
     }),
 };
+
+courseService.startExamReminderScheduler();
 
 module.exports = courseController;
