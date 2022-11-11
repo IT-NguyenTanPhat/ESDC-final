@@ -11,7 +11,7 @@ const getCurrentTime = () => {
     }-${dateObj.getDate()}`;
 
     const currentTime = new Date(date);
-    currentTime.setHours(hour - 7);
+    currentTime.setHours(hour);
     currentTime.setMinutes(minute);
     currentTime.setDate(currentTime.getDate());
 
