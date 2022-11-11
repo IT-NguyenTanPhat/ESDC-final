@@ -66,10 +66,7 @@ const adminController = {
             error: req.flash('error'),
             success: req.flash('success'),
         };
-        const users = await userService.get(
-            { status: 'banned' },
-            'bannedAt _id name'
-        );
+        const users = await userService.get({ status: 'banned' });
         res.render('admin/banned', {
             title: 'Admin',
             layout: 'admin',

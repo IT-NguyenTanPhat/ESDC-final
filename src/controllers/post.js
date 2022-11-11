@@ -93,7 +93,10 @@ const postController = {
         }
         if (req.body.banId) {
             await userService
-                .update({ _id: req.body.banId }, { status: 'banned' })
+                .update(
+                    { _id: req.body.banId },
+                    { status: 'banned', bannedAt: Date.now() }
+                )
                 .catch((err) => {
                     req.flash('error', 'Cấm người dùng thất bại');
                     return res.redirect('back');

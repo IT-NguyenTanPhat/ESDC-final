@@ -20,7 +20,7 @@
                 <td>{{email}}</td>
                 <td>{{bannedAt}}</td>
                 <td>
-                    <form action="/admin/unlock-user">
+                    <form action="/admin/unlock-user" method="post">
                         <input type="hidden" name="id" value="{{_id}}">
                         <button type="submit"
                             class="btn btn-success"

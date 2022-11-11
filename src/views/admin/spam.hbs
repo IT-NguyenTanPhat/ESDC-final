@@ -36,13 +36,7 @@
         <div class='col-5 mb-3'>
             <div class='card'>
                 <div class='card-body'>
-                    <div class='d-flex justify-content-between'>
-                        <h5 class='card-title mb-1'>{{author.name}}</h5>
-                        <span class='text-warning'><i
-                                class='fa-solid fa-spinner'
-                            ></i>
-                            Chờ kiểm duyệt</span>
-                    </div>
+                    <h5 class='card-title mb-1'>{{author.name}}</h5>
                     <span
                         class='text-muted'
                         style='font-size: 11px;'
@@ -64,7 +58,7 @@
                         allow='autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share'
                     ></iframe>
                     <hr />
-                    <div class='row'>
+                    <div class='row mb-2'>
                         <div class='col'><form
                                 action='/posts/un-spam'
                                 method='post'
@@ -110,7 +104,7 @@
                                 <input
                                     type='hidden'
                                     name='banId'
-                                    value='{{../user_id}}'
+                                    value='{{author._id}}'
                                 />
                                 <button
                                     type='submit'
