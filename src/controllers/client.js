@@ -1,6 +1,6 @@
 const catchAsync = require('../utils/catchAsync');
 
-const { postService, courseService, marketService, userService } = require('../services');
+const { postService, courseService, marketService } = require('../services');
 
 const clientController = {
     profile: catchAsync(async (req, res) => {
@@ -24,6 +24,7 @@ const clientController = {
         const event = [];
         const courses = await courseService.get(
             {
+                author: req.cookies.user._id,
                 examinations: { $ne: null },
             },
             null,
@@ -41,19 +42,19 @@ const clientController = {
     }),
 
     reportUser: catchAsync(async (req, res, next) => {
-        const { userId, reason } = req.body;
-        const user = await userService.get({ _id: userId }, 'status');
-        if (!userId || !reason || !user || user.status === 'banned') {
+        if (!req.body.id) {
             req.flash('error', 'Báo cáo người dùng thất bại');
             return res.redirect('/posts');
         }
 
-        const report = await denounceService.create({
-            reporter: req.user._id,
-            reason,
-            userId,
-        });
-        res.json(report);
+        await postService.update(
+            {
+                _id: req.body.id,
+            },
+            { isSpam: true }
+        );
+        req.flash('success', 'Báo cáo người dùng thành công');
+        res.redirect('/posts');
     }),
 };
 

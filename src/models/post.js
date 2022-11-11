@@ -13,7 +13,6 @@ const Post = new Schema(
         answerUrl: String,
         description: {
             type: String,
-            required: true,
         },
         isSpam: {
             type: Boolean,

@@ -15,6 +15,7 @@ const Market = new Schema(
         status: {
             type: String,
             enum: ['pending', 'success'],
+            default: 'pending'
         },
     },
     {

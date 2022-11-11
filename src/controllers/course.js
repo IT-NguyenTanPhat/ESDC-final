@@ -222,16 +222,16 @@ const courseController = {
 		const { itemId, id } = req.body;
 		const course = await courseService.getOne({ _id: id });
 		if (!itemId || !course) {
-			req.flash('error', 'Cập nhật lịch kiểm tra thất bại');
+			req.flash('error', 'Xoá lịch kiểm tra thất bại');
 			return res.redirect(`/${id}`);
 		}
 		await courseService
 			.update({ _id: id }, { $pull: { examinations: { _id: itemId } } })
 			.catch((err) => {
-				req.flash('error', 'Cập nhật lịch kiểm tra thất bại');
+				req.flash('error', 'Xoá lịch kiểm tra thất bại');
 				return res.redirect(`/${id}`);
 			});
-		req.flash('success', 'Cập nhật lịch kiểm tra thành công');
+		req.flash('success', 'Xoá lịch kiểm tra thành công');
 		res.redirect(`/${id}`);
 	}),
 };

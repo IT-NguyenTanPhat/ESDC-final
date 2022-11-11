@@ -11,6 +11,7 @@ const { clientController } = require('../controllers');
 // Current path: /
 router.get('/profile', clientController.profile);
 router.get('/get-calendar', clientController.getCalendar);
+router.post('/report', clientController.reportUser);
 router.use('/posts', postRouter);
 router.use('/calendar', calendarRouter);
 router.use('/market', marketRouter);

@@ -3,6 +3,10 @@ const { postService, userService } = require('../services');
 
 const postController = {
     index: catchAsync(async (req, res) => {
+        const message = {
+            error: req.flash('error'),
+            success: req.flash('success'),
+        };
         const posts = await postService.get({
             status: 'success',
             description: { $regex: req.query.search || '', $options: 'i' },
@@ -10,6 +14,7 @@ const postController = {
         res.render('client/post', {
             title: 'Điểm rèn luyện',
             posts,
+            message,
             user: req.cookies.user,
         });
     }),
@@ -91,15 +96,15 @@ const postController = {
                 .update({ _id: req.body.banId }, { status: 'banned' })
                 .catch((err) => {
                     req.flash('error', 'Cấm người dùng thất bại');
-                    return res.redirect('/back');
+                    return res.redirect('back');
                 });
         }
         await postService.delete({ _id: id }).catch((err) => {
             req.flash('error', 'Xoá bài viết thất bại');
-            return res.redirect('/back');
+            return res.redirect('back');
         });
         req.flash('success', 'Xoá bài viết thành công');
-        res.redirect('/back');
+        res.redirect('back');
     }),
 };
 
