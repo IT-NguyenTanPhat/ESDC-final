@@ -18,6 +18,6 @@ module.exports = [
 		description: 'Đrl câu lạc bộ nhật ngữ',
 		status: 'success',
 		dueTo: '2022-11-27',
-		faculty: 'Ngoại ngữ',
+		faculty: 'Công nghệ thông tin',
 	},
 ];
