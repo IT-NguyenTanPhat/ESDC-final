@@ -6,6 +6,8 @@ module.exports = [
 		answerUrl: 'https://www.facebook.com/khoaduoctdtu/posts/424060166569451',
 		description: 'Điểm rèn luyện tuần này nha mọi người',
 		status: 'success',
+		dueTo: '2022-11-27',
+		faculty: 'Công nghệ thông tin',
 	},
 	{
 		_id: '63668538c6bed544b5e5e486',
@@ -15,5 +17,7 @@ module.exports = [
 			'https://www.facebook.com/Nigoto.tdt.edu.vn/posts/pfbid03BqfytLxWxhmqxsdAPB3iwVeZpoDca13WvfnKPTW5BFgNkGYb9icahMUJGi4BPh2l',
 		description: 'Đrl câu lạc bộ nhật ngữ',
 		status: 'success',
+		dueTo: '2022-11-27',
+		faculty: 'Ngoại ngữ',
 	},
 ];

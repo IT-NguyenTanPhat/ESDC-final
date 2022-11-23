@@ -7,6 +7,7 @@ const postService = {
             .populate('author')
             .lean();
         res.updatedAt = res.updatedAt.toLocaleString('vi-VN');
+        res.dueTo = res.dueTo.toLocaleDateString('vi-VN');
         return res;
     },
 
@@ -17,6 +18,7 @@ const postService = {
             .lean();
         res.map((item) => {
             item.updatedAt = item.updatedAt.toLocaleString('vi-VN');
+            item.dueTo = item.dueTo.toLocaleDateString('vi-VN');
         });
         return res;
     },

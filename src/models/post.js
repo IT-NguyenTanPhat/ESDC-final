@@ -18,6 +18,8 @@ const Post = new Schema(
             type: Boolean,
             default: false,
         },
+        dueTo: Date,
+        faculty: String,
         status: {
             type: String,
             enum: ['pending', 'success'],

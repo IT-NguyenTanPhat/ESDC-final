@@ -48,7 +48,7 @@ const courseService = {
                 await mailService.sendMail({
                     to: email,
                     subject: 'An important event within the next 2 days',
-                    content: `<p>Your Reminder: ${content}</p><br><p>${title}</p`,
+                    content: `<p>Your Reminder: ${content}</p><br><p>${title}</p>`,
                 });
 
                 await this.update(

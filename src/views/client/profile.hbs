@@ -199,6 +199,10 @@
 							<span class='text-warning'><i class='fa-solid fa-spinner'></i>
 								Chờ kiểm duyệt</span>
 						{{/equal}}
+                        {{#equal status 'sold'}}
+							<span class='text-secondary'><i class="fa-solid fa-circle-check"></i>
+								Đã bán</span>
+						{{/equal}}
 						<li class='nav-item dropdown'>
 							<a
 								class='nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow'

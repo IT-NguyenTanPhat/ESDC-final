@@ -1,12 +1,69 @@
-<div class='rounded p-2 px-3 d-flex justify-content-between align-items-center'>
-    <div></div>
+<!-- Tabs navs -->
+<ul class='nav nav-tabs mb-3' id='ex1' role='tablist'>
+    <li class='nav-item' role='presentation'>
+        <a
+            class='nav-link active'
+            id='ex1-tab-1'
+            data-mdb-toggle='tab'
+            href='#ex1-tabs-1'
+            role='tab'
+            aria-controls='ex1-tabs-1'
+            aria-selected='true'
+        >HK1 năm 3</a>
+    </li>
+    <li class='nav-item' role='presentation'>
+        <a
+            class='nav-link'
+            id='ex1-tab-2'
+            data-mdb-toggle='tab'
+            href='#ex1-tabs-2'
+            role='tab'
+            aria-controls='ex1-tabs-2'
+            aria-selected='false'
+        >HK2 năm 2</a>
+    </li>
+    <li class='nav-item' role='presentation'>
+        <a
+            class='nav-link'
+            id='ex1-tab-2'
+            data-mdb-toggle='tab'
+            href='#ex1-tabs-2'
+            role='tab'
+            aria-controls='ex1-tabs-2'
+            aria-selected='false'
+        >HK1 năm 2</a>
+    </li>
+    <li class='nav-item' role='presentation'>
+        <a
+            class='nav-link'
+            id='ex1-tab-2'
+            data-mdb-toggle='tab'
+            href='#ex1-tabs-2'
+            role='tab'
+            aria-controls='ex1-tabs-2'
+            aria-selected='false'
+        >HK2 năm 1</a>
+    </li>
+    <li class='nav-item me-auto' role='presentation'>
+        <a
+            class='nav-link'
+            id='ex1-tab-3'
+            data-mdb-toggle='tab'
+            href='#ex1-tabs-3'
+            role='tab'
+            aria-controls='ex1-tabs-3'
+            aria-selected='false'
+        >HK1 năm 1</a>
+    </li>
     <button
+        style='height:fit-content'
         class='btn btn-success'
         data-mdb-toggle='modal'
         data-mdb-target='#createModal'
     >+ Thêm môn học</button>
-</div>
-<hr class='mt-0' />
+</ul>
+<!-- Tabs navs -->
+
 {{#if message.error}}
     <div
         class='alert alert-dismissible fade show alert-danger w-50'
@@ -41,67 +98,96 @@
     </div>
 {{/if}}
 
-<div class='row'>
-    {{#each courses}}
-        <div class='col-5 mb-3' style='height: 250px'>
-            <div class='card h-100'>
-                <div class='card-body'>
-                    <ul
-                        class='navbar-nav ms-auto d-flex flex-row justify-content-between align-items-center'
-                    >
-                        <h5 class='card-title mb-0'><a
-                                href='/{{_id}}'
-                            >{{name}}</a></h5>
-                        <li class='nav-item dropdown'>
-                            <a
-                                class='nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow'
-                                href='#'
-                                id='navbarDropdownMenuLink'
-                                role='button'
-                                data-mdb-toggle='dropdown'
-                                aria-expanded='false'
-                            >
-                                <i
-                                    class='fa-solid fa-ellipsis-vertical fa-lg'
-                                ></i>
-                            </a>
+<!-- Tabs content -->
+<div class='tab-content' id='ex1-content'>
+    <div
+        class='tab-pane fade show active'
+        id='ex1-tabs-1'
+        role='tabpanel'
+        aria-labelledby='ex1-tab-1'
+    >
+        <div class='row'>
+            {{#each courses}}
+                <div class='col-5 mb-3' style='height: 250px'>
+                    <div class='card h-100'>
+                        <div class='card-body'>
                             <ul
-                                class='dropdown-menu dropdown-menu-end'
-                                aria-labelledby='navbarDropdownMenuLink'
+                                class='navbar-nav ms-auto d-flex flex-row justify-content-between align-items-center'
                             >
-                                <li><a class='dropdown-item' href='#'>Chia sẻ</a></li>
-                                <li><a
-                                        class='dropdown-item'
+                                <h5 class='card-title mb-0'><a
+                                        href='/{{_id}}'
+                                    >{{name}}</a></h5>
+                                <li class='nav-item dropdown'>
+                                    <a
+                                        class='nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow'
                                         href='#'
-                                        data-mdb-toggle='modal'
-                                        data-mdb-target='#editModal'
-                                        onclick="$('#edit-id').val('{{_id}}');
+                                        id='navbarDropdownMenuLink'
+                                        role='button'
+                                        data-mdb-toggle='dropdown'
+                                        aria-expanded='false'
+                                    >
+                                        <i
+                                            class='fa-solid fa-ellipsis-vertical fa-lg'
+                                        ></i>
+                                    </a>
+                                    <ul
+                                        class='dropdown-menu dropdown-menu-end'
+                                        aria-labelledby='navbarDropdownMenuLink'
+                                    >
+                                        <li><a
+                                                class='dropdown-item'
+                                                href='#'
+                                            >Chia sẻ</a></li>
+                                        <li><a
+                                                class='dropdown-item'
+                                                href='#'
+                                                data-mdb-toggle='modal'
+                                                data-mdb-target='#editModal'
+                                                onclick="$('#edit-id').val('{{_id}}');
                                         $('#name').val('{{name}}');"
-                                    >Chỉnh sửa</a></li>
-                                <li><a
-                                        class='dropdown-item'
-                                        href='#'
-                                        data-mdb-toggle='modal'
-                                        data-mdb-target='#deleteModal'
-                                        onclick="$('#delete-id').val('{{_id}}');"
-                                    >Xoá</a></li>
+                                            >Chỉnh sửa</a></li>
+                                        <li><a
+                                                class='dropdown-item'
+                                                href='#'
+                                                data-mdb-toggle='modal'
+                                                data-mdb-target='#deleteModal'
+                                                onclick="$('#delete-id').val('{{_id}}');"
+                                            >Xoá</a></li>
+                                    </ul>
+                                </li>
                             </ul>
-                        </li>
-                    </ul>
-                    <hr />  
-                    <div>
-                        {{#each examinations}}
-                        <div class="d-flex">
-                            <p class="me-auto"><strong>{{title}}</strong></p>
-                            <p>{{time}}</p>
+                            <hr />
+                            <div>
+                                {{#each examinations}}
+                                    <div class='d-flex'>
+                                        <p class='me-auto'><strong
+                                            >{{title}}</strong></p>
+                                        <p>{{time}}</p>
+                                    </div>
+                                {{/each}}
+                            </div>
                         </div>
-                        {{/each}}
                     </div>
                 </div>
-            </div>
+            {{/each}}
         </div>
-    {{/each}}
+    </div>
+    <div
+        class='tab-pane fade'
+        id='ex1-tabs-2'
+        role='tabpanel'
+        aria-labelledby='ex1-tab-2'
+    >
+    </div>
+    <div
+        class='tab-pane fade'
+        id='ex1-tabs-3'
+        role='tabpanel'
+        aria-labelledby='ex1-tab-3'
+    >
+    </div>
 </div>
+<!-- Tabs content -->
 
 <!-- Modal -->
 <div
@@ -173,7 +259,7 @@
                         <input
                             type='text'
                             name='name'
-                            id="name"
+                            id='name'
                             class='form-control'
                             required
                         />
